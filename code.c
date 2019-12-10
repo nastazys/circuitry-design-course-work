@@ -71,10 +71,17 @@ void reset_wait(void)
 	}
 }
 
+void indicate(int n)
+{
+	p = beep(t, tone);
+	clear_led();
+	p = blink_led(n);
+	reset_wait();
+}
+
 
 int observer(void)	//	Функция для отслеживания нажатия клавиш
 {
-	short i = 0;
 	short p = 0;
 	int t = 300;
 	int tone = 100;
@@ -87,45 +94,25 @@ int observer(void)	//	Функция для отслеживания нажатия клавиш
 			_delay_ms(5); 	//	Защита от дребезга
 			if(!(PIND & (1<<PIND0))) 	//	Проверка нажатия кнопки игрока 1
 			{ 					
-				p = beep(t, tone);	//	Звуковой сигнал
-				i=1; 				//	Флаг завершения цикла отслеживания нажатия кнопки
-				clear_led();
-				p = blink_led(0);
-				reset_wait();
-				i=0;
+				indicate(0);
 			} 				
 			else
 			{
 				if(!(PIND & (1<<PIND1))) //	Проверка нажатия кнопки игрока 2
 				{
-					p = beep(t, tone);
-					i=1;
-					clear_led();
-					p = blink_led(1);
-					reset_wait();
-					i=0;
+					indicate(1);
 				}
 				else
 				{
 					if(!(PIND & (1<<PIND2))) //	Проверка нажатия кнопки игрока 3
 					{
-						p = beep(t, tone);
-						i=1;
-						clear_led();
-						p = blink_led(2);
-						reset_wait();
-						i=0;
+						indicate(2);
 					}
 					else
 					{
 						if(!(PIND & (1<<PIND3))) //	Проверка нажатия кнопки игрока 4
 						{
-							p = beep(t, tone);
-							i=1;
-							clear_led();
-							p = blink_led(3);
-							reset_wait();
-							i=0;
+							indicate(3);
 						}
 					}
 				} 
