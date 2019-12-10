@@ -73,6 +73,8 @@ void reset_wait(void)
 
 void indicate(int n)
 {
+	int t = 300;
+	int tone = 100;
 	p = beep(t, tone);
 	clear_led();
 	p = blink_led(n);
@@ -83,8 +85,6 @@ void indicate(int n)
 int observer(void)	//	Функция для отслеживания нажатия клавиш
 {
 	short p = 0;
-	int t = 300;
-	int tone = 100;
 
 	while(i==0) 			//	Цикл отслеживания нажатия кнопок
 	{ 						
